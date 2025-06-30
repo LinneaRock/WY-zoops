@@ -1,0 +1,217 @@
+Site_ID_pseudonym,Reservoir_ID,Reservoir_Name,Sample_ID,Site_ID,date,Missing_WQ,hasZoopdata,SI_Notes
+C,ALC,Alcova,ALC_P1_20210614,P1,6/14/2021,Complete WQ Record,Yes,yellow flag
+C,ALC,Alcova,ALC_P1_20210720,P1,7/20/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,ALC,Alcova,ALC_P1_20210824,P1,8/24/2021,"chl_a_ugL, Secchi_m",Yes,NA
+C,ALC,Alcova,ALC_P1_DUP_20210614,P1_DUP,6/14/2021,No WQ data,Yes,NA
+B,ALC,Alcova,ALC_P2_20210614,P2,6/14/2021,Complete WQ Record,Yes,yellow flag
+B,ALC,Alcova,ALC_P2_20210720,P2,7/20/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,ALC,Alcova,ALC_P3_20210614,P3,6/14/2021,chl_a_ugL,Yes,NA
+A,ALC,Alcova,ALC_P3_20210720,P3,7/20/2021,chl_a_ugL,Yes,NA
+A,ALC,Alcova,ALC_P3_20210824,P3,8/24/2021,"chl_a_ugL, Secchi_m",Yes,NA
+C,ALS,Alsop,ALS_P1_20220621,P1,6/21/2022,WaterDepth_m,Yes,Complete SIF Analysis
+C,ALS,Alsop,ALS_P1_20220902,P1,9/2/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,ALS,Alsop,ALS_P1_20221017,P1,10/17/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,ALS,Alsop,ALS_P2_20220603,P2,6/3/2022,No WQ data,Yes,NA
+A,ALS,Alsop,ALS_P3_20220603,P3,6/3/2022,No WQ data,Yes,NA
+C,BOY,Boysen,BOY_LPD_20220927,LPD_27m,9/27/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,BOY,Boysen,BOY_LPD_20221019,LPD_29m,10/19/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,BOY,Boysen,BOY_LPD_20220829,LPD_30m,8/29/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,BOY,Boysen,BOY_RPD_20220927,RPD_11m,9/27/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,BOY,Boysen,BOY_RPD_20220615,RPD_12m,6/15/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,BOY,Boysen,BOY_RPD_20220712,RPD_12m,7/12/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,BOY,Boysen,BOY_TPD_20220927,TPD_16m,9/27/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,BOY,Boysen,BOY_TPD_20220615,TPD_17m,6/15/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,FON,Fontanelle,FON_P1_20210630,P1,6/30/2021,chl_a_ugL,Yes,yellow flag
+C,FON,Fontanelle,FON_P1_20211001,P1,10/1/2021,"chl_a_ugL, Secchi_m",Yes,NA
+B,FON,Fontanelle,FON_P2_20210630,P2,6/30/2021,chl_a_ugL,Yes,yellow flag
+B,FON,Fontanelle,FON_P2_20210630,P2,6/30/2021,chl_a_ugL,Yes,yellow flag
+B,FON,Fontanelle,FON_P2_20211001,P2,10/1/2021,"chl_a_ugL, Secchi_m",Yes,NA
+A,FON,Fontanelle,FON_P3_20210630,P3,6/30/2021,chl_a_ugL,Yes,Complete SIF Analysis
+A,FON,Fontanelle,FON_P3_20211001,P3,10/1/2021,"chl_a_ugL, Secchi_m",Yes,Complete SIF Analysis
+A,FON,Fontanelle,FON_P3_DUP_20210630,P3_DUP,6/30/2021,No WQ data,Yes,NA
+A,GLN,Glendo,GLN_P1_20210609,P1,6/9/2021,DO_percent,Yes,Complete SIF Analysis
+A,GLN,Glendo,GLN_P1_20210712,P1,7/12/2021,Complete WQ Record,Yes,yellow flag
+A,GLN,Glendo,GLN_P1_20210809,P1,8/9/2021,Complete WQ Record,Yes,Complete SIF Analysis
+B,GLN,Glendo,GLN_P2_20210609,P2,6/9/2021,DO_percent,Yes,NA
+B,GLN,Glendo,GLN_P2_20210809,P2,8/9/2021,Complete WQ Record,Yes,red flag
+B,GLN,Glendo,GLN_P2_DUP_20210609,P2_DUP,6/9/2021,No WQ data,Yes,NA
+C,GLN,Glendo,GLN_P3_20210609,P3,6/9/2021,"chl_a_ugL, SPC_uScm, DO_percent",Yes,yellow flag
+C,GLN,Glendo,GLN_P3_20210712,P3,7/12/2021,"chl_a_ugL, SPC_uScm",Yes,Complete SIF Analysis
+C,GLN,Glendo,GLN_P3_20210809,P3,8/9/2021,chl_a_ugL,Yes,red flag
+A,GRN,Granite,GRN_P1_20220701,P1,7/1/2022,chl_a_ugL,Yes,NA
+A,GRN,Granite,GRN_P1_20220725,P1,7/25/2022,WaterDepth_m,Yes,Complete SIF Analysis
+A,GRN,Granite,GRN_P1_20220815,P1,8/15/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,GRN,Granite,GRN_P1_20221019,P1,10/19/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,GRN,Granite,GRN_P1_DUP_20220815,P1_DUP,8/15/2022,No WQ data,Yes,NA
+A,GRN,Granite,GRN_P1_DUP_pDUP_20220815,P1_DUP_pDUP,8/15/2022,No WQ data,Yes,NA
+B,GRN,Granite,GRN_P2_20220701,P2,7/1/2022,chl_a_ugL,Yes,NA
+B,GRN,Granite,GRN_P2_20220725,P2,7/25/2022,WaterDepth_m,Yes,Complete SIF Analysis
+B,GRN,Granite,GRN_P2_20220815,P2,8/15/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,GRN,Granite,GRN_P3_20220701,P3,7/1/2022,chl_a_ugL,Yes,NA
+C,GRN,Granite,GRN_P3_20220725,P3,7/25/2022,WaterDepth_m,Yes,yellow flag
+C,GRN,Granite,GRN_P3_20220815,P3,8/15/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,GRN,Granite,GRN_P3_20221019,P3,10/19/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,GRY,Grayrocks,GRY_P1_20210604,P1,6/4/2021,DO_percent,Yes,NA
+C,GRY,Grayrocks,GRY_P1_20210714,P1,7/14/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,GRY,Grayrocks,GRY_P1_20210902,P1,9/2/2021,"chl_a_ugL, Secchi_m",Yes,Complete SIF Analysis
+C,GRY,Grayrocks,GRY_P1_20220623,P1,6/23/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,GRY,Grayrocks,GRY_P1_20220726,P1,7/26/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,GRY,Grayrocks,GRY_P1_20220817,P1,8/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,GRY,Grayrocks,GRY_P1_20220930,P1,9/30/2022,Complete WQ Record,Yes,yellow flag
+B,GRY,Grayrocks,GRY_P2_20210604,P2,6/4/2021,DO_percent,Yes,NA
+B,GRY,Grayrocks,GRY_P2_20210714,P2,7/14/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,GRY,Grayrocks,GRY_P2_20210902,P2,9/2/2021,"chl_a_ugL, Secchi_m",Yes,Complete SIF Analysis
+B,GRY,Grayrocks,GRY_P2_20220623,P2,6/23/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,GRY,Grayrocks,GRY_P2_20220726,P2,7/26/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,GRY,Grayrocks,GRY_P2_20220817,P2,8/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,GRY,Grayrocks,GRY_P2_20220930,P2,9/30/2022,Complete WQ Record,Yes,yellow flag
+A,GRY,Grayrocks,GRY_P3_20210604,P3,6/4/2021,"chl_a_ugL, DO_percent",Yes,NA
+A,GRY,Grayrocks,GRY_P3_20210714,P3,7/14/2021,chl_a_ugL,Yes,yellow flag
+A,GRY,Grayrocks,GRY_P3_20210902,P3,9/2/2021,"chl_a_ugL, DO_percent, Secchi_m",Yes,NA
+A,GRY,Grayrocks,GRY_P3_20220623,P3,6/23/2022,Complete WQ Record,Yes,yellow flag
+A,GRY,Grayrocks,GRY_P3_20220726,P3,7/26/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,GRY,Grayrocks,GRY_P3_20220817,P3,8/17/2022,Complete WQ Record,Yes,yellow flag
+A,GRY,Grayrocks,GRY_P3_20220930,P3,9/30/2022,Complete WQ Record,Yes,yellow flag
+A,GUE,Guernsey,GUE_P1_20210611,P1,6/11/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,GUE,Guernsey,GUE_P2_20210611,P2,6/11/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,GUE,Guernsey,GUE_P3_20210611,P3,6/11/2021,chl_a_ugL,Yes,NA
+A,OCE,Ocean Lakes,OCE_P1_20210617,P1,6/17/2021,No WQ data,Yes,NA
+A,OCE,Ocean Lakes,OCE_P1_20210727,P1,7/27/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,OCE,Ocean Lakes,OCE_P1_20210810,P1,8/10/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,OCE,Ocean Lakes,OCE_P2_20210616,P2,6/16/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,OCE,Ocean Lakes,OCE_P2_20210727,P2,7/27/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,OCE,Ocean Lakes,OCE_P2_20210810,P2,8/10/2021,chl_a_ugL,Yes,NA
+C,OCE,Ocean Lakes,OCE_P3_20210616,P3,6/16/2021,chl_a_ugL,Yes,NA
+C,OCE,Ocean Lakes,OCE_P3_20210727,P3,7/27/2021,chl_a_ugL,Yes,NA
+A,PIL,Pilot Butte,PIL_P1_20210617,P1,6/17/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,PIL,Pilot Butte,PIL_P2_20210617,P2,6/17/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,PIL,Pilot Butte,PIL_P2_DUP_20210617,P2_DUP,6/17/2021,No WQ data,Yes,NA
+C,PIL,Pilot Butte,PIL_P3_20210617,P3,6/17/2021,chl_a_ugL,Yes,NA
+B,SAR,Saratoga,SAR_P2_20220812,P2,8/12/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,SAR,Saratoga,SAR_P3_20220621,P3,6/21/2022,WaterDepth_m,Yes,Complete SIF Analysis
+A,VIV,Viva Naughton,VIV_P1_20210629,P1,6/29/2021,"chl_a_ugL, Secchi_m",Yes,yellow flag
+A,VIV,Viva Naughton,VIV_P1_20210827,P1,8/27/2021,No WQ data,No Zoop data,yellow flag
+B,VIV,Viva Naughton,VIV_P2_20210629,P2,6/29/2021,chl_a_ugL,Yes,Complete SIF Analysis
+C,VIV,Viva Naughton,VIV_P3_20210629,P3,6/29/2021,chl_a_ugL,Yes,yellow flag
+A,WHE,Wheatland 3,WHE_P1_20210602,P1,6/2/2021,"pH, DO_percent",Yes,NA
+A,WHE,Wheatland 3,WHE_P1_20210707,P1,7/7/2021,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,WHE,Wheatland 3,WHE_P1_20210903,P1,9/3/2021,"chl_a_ugL, Secchi_m",Yes,Complete SIF Analysis
+A,WHE,Wheatland 3,WHE_P1_20220623,P1,6/23/2022,Complete WQ Record,Yes,yellow flag
+A,WHE,Wheatland 3,WHE_P1_20221017,P1,10/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,WHE,Wheatland 3,WHE_P2_20210602,P2,6/2/2021,"pH, DO_percent",Yes,NA
+B,WHE,Wheatland 3,WHE_P2_20210707,P2,7/7/2021,Complete WQ Record,Yes,Complete SIF Analysis
+B,WHE,Wheatland 3,WHE_P2_20210903,P2,9/3/2021,"chl_a_ugL, Secchi_m",Yes,Complete SIF Analysis
+B,WHE,Wheatland 3,WHE_P2_20220907,P2,9/7/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,WHE,Wheatland 3,WHE_P2_20221017,P2,10/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,WHE,Wheatland 3,WHE_P3_20210602,P3,6/2/2021,DO_percent,Yes,NA
+C,WHE,Wheatland 3,WHE_P3_20210707,P3,7/7/2021,chl_a_ugL,Yes,yellow flag
+C,WHE,Wheatland 3,WHE_P3_20210903,P3,9/3/2021,"chl_a_ugL, Secchi_m",Yes,Complete SIF Analysis
+C,WHE,Wheatland 3,WHE_P3_20220907,P3,9/7/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,WHE,Wheatland 3,WHE_P3_20221017,P3,10/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,WHE,Wheatland 3,WHE_P3_DUP_20210602,P3_DUP,6/2/2021,No WQ data,Yes,NA
+B,ALS,Alsop,ALS_P2_20220621,P2,6/21/2022,WaterDepth_m,Yes,Complete SIF Analysis
+B,ALS,Alsop,ALS_P2_20220902,P2,9/2/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,ALS,Alsop,ALS_P3_20220621,P3,6/21/2022,WaterDepth_m,Yes,Complete SIF Analysis
+A,ALS,Alsop,ALS_P3_20220902,P3,9/2/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,BOY,Boysen,BOY_LPD_20220615,LPD_30m,6/15/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,BOY,Boysen,BOY_LPD_20220712,LPD_30m,7/12/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,BOY,Boysen,BOY_RPD_20220829,RPD_12m,8/29/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,BOY,Boysen,BOY_TPD_20220829,TPD_16m,8/29/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,BOY,Boysen,BOY_TPD_20220712,TPD_17m,7/12/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,GRN,Granite,GRN_P1_11m_20220920,P1_11m,9/20/2022,No WQ data,Yes,NA
+B,GRN,Granite,GRN_P2_20221019,P2,10/19/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,GRN,Granite,GRN_P2_11m_20220920_20220920,P2_11m_20220920,9/20/2022,No WQ data,Yes,Complete SIF Analysis
+C,GRN,Granite,GRN_P3_11m_20220920,P3_11m,9/20/2022,No WQ data,Yes,Complete SIF Analysis
+B,GRY,Grayrocks,GRY_P2_3m_20221020,P2_3m,10/20/2022,No WQ data,Yes,NA
+A,GRY,Grayrocks,GRY_P3_20221020,P3,10/20/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,GRY,Grayrocks,GRY_P1_3M_DUP_20221020,P1_3M_DUP,10/20/2022,No WQ data,Yes,NA
+C,NFL,New Forks Lake,NFL_P1_20210817,P1,8/17/2021,No WQ data,Yes,Complete SIF Analysis
+C,NFL,New Forks Lake,NFL_P1_20210914,P1,9/14/2021,No WQ data,Yes,Complete SIF Analysis
+C,NFL,New Forks Lake,NFL_P1_20211019,P1,10/19/2021,No WQ data,Yes,Complete SIF Analysis
+B,NFL,New Forks Lake,NFL_P2_20210720,P2,7/20/2021,No WQ data,Yes,Complete SIF Analysis
+B,NFL,New Forks Lake,NFL_P2_20210817,P2,8/17/2021,No WQ data,Yes,Complete SIF Analysis
+B,NFL,New Forks Lake,NFL_P2_20210914,P2,9/14/2021,No WQ data,Yes,Complete SIF Analysis
+B,NFL,New Forks Lake,NFL_P2_20211019,P2,10/19/2021,No WQ data,Yes,Complete SIF Analysis
+A,NFL,New Forks Lake,NFL_P3_20210720,P3,7/20/2021,No WQ data,Yes,Complete SIF Analysis
+A,NFL,New Forks Lake,NFL_P3_20210817,P3,8/17/2021,No WQ data,Yes,Complete SIF Analysis
+A,NFL,New Forks Lake,NFL_P3_20210914,P3,9/14/2021,No WQ data,Yes,Complete SIF Analysis
+A,NFL,New Forks Lake,NFL_P3_20211019,P3,10/19/2021,No WQ data,Yes,Complete SIF Analysis
+A,SAR,Saratoga,SAR_P1_20220621,P1,6/21/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,SAR,Saratoga,SAR_P1_20220712,P1,7/12/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,SAR,Saratoga,SAR_P1_20220728,P1,7/28/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,SAR,Saratoga,SAR_P1_20220812,P1,8/12/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,SAR,Saratoga,SAR_P1_20220819,P1,8/19/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+A,SAR,Saratoga,SAR_P1_20220912,P1,9/12/2022,chl_a_ugL,Yes,Complete SIF Analysis
+B,SAR,Saratoga,SAR_P2_20220621,P2,6/21/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,SAR,Saratoga,SAR_P2_20220712,P2,7/12/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,SAR,Saratoga,SAR_P2_20220728,P2,7/28/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,SAR,Saratoga,SAR_P2_20220819,P2,8/19/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+B,SAR,Saratoga,SAR_P2_20220912,P2,9/12/2022,chl_a_ugL,Yes,Complete SIF Analysis
+C,SAR,Saratoga,SAR_P3_20220712,P3,7/12/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,SAR,Saratoga,SAR_P3_20220728,P3,7/28/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,SAR,Saratoga,SAR_P3_20220812,P3,8/12/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,SAR,Saratoga,SAR_P3_20220819,P3,8/19/2022,Complete WQ Record,Yes,Prioritise SIF Analysis
+C,SAR,Saratoga,SAR_P3_20220912,P3,9/12/2022,chl_a_ugL,Yes,Complete SIF Analysis
+A,WHE,Wheatland 3,WHE_P1_20220726,P1,7/26/2022,WaterDepth_m,Yes,Complete SIF Analysis
+A,WHE,Wheatland 3,WHE_P1_20220817,P1,8/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+A,WHE,Wheatland 3,WHE_P1_20220907,P1,9/7/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,WHE,Wheatland 3,WHE_P2_20220623,P2,6/23/2022,Complete WQ Record,Yes,Complete SIF Analysis
+B,WHE,Wheatland 3,WHE_P2_20220726,P2,7/26/2022,WaterDepth_m,Yes,Complete SIF Analysis
+B,WHE,Wheatland 3,WHE_P2_20220817,P2,8/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,WHE,Wheatland 3,WHE_P3_20220623,P3,6/23/2022,Complete WQ Record,Yes,Complete SIF Analysis
+C,WHE,Wheatland 3,WHE_P3_20220726,P3,7/26/2022,WaterDepth_m,Yes,Complete SIF Analysis
+C,WHE,Wheatland 3,WHE_P3_20220817,P3,8/17/2022,Complete WQ Record,Yes,Complete SIF Analysis
+NA,NA,NA,ALC_P1_20210614_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,"GRY_P1_20210902	",NA,NA,No WQ data,No Zoop data,red flag
+NA,NA,NA,GRN_P1_20220601,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRN_P3_20220601,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,WHE_P1_20210701,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,FON_P3_20210630_DUP,NA,NA,No WQ data,No Zoop data,yellow flag
+NA,NA,NA,GLN_P2_20210609_DUP,NA,NA,No WQ data,No Zoop data,yellow flag
+NA,NA,NA,GRN_P2_20220601,NA,NA,No WQ data,No Zoop data,yellow flag
+NA,NA,NA,GRY_P2_202220623,NA,NA,No WQ data,No Zoop data,yellow flag
+NA,NA,NA,WHE_P3_20221012_DUP,NA,NA,No WQ data,No Zoop data,yellow flag
+NA,NA,NA,WHE_P2_20220817_DUP,NA,NA,No WQ data,No Zoop data,yellow flag
+NA,NA,NA,GLN_P2_20210712,NA,NA,No WQ data,No Zoop data,yellow flag
+NA,NA,NA,GRY_P3_20220907_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRY_P1_20220939_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRY_P3_20220812_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P3_20220812_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P3_20220812_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P3_20220524,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P3_20220725,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P2_20220524,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P1_20220524,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P1_20220831,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P1_20220912_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P3_202201017_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,VIV_P2_20210827,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P2_20220831,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P3_20220831,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,SAR_P3_20220831_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,VIV_P3_20210827,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P2_20220715,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P1_20220715,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P1_20220812,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P3_20220812,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P2_20220812,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P3_20221017,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,ALS_P2_20221017,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,NFL_P3_20211109,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,NFL_P2_20211109,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRN_P2_20220831,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,BOY_RPD_20220510,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,BOY_LPD_20220510,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRN_P1_20220831,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRY_P2_20220907,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRN_P3_20220831,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,BOY_TPD_20220510,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRY_P1_20220907,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRY_P3_20220907,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRY_P2_20221020,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,JKL_NORTH_20220728,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,NFL_UPPER2_20211109,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,JKL_MID_20220728,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,WHE_P1_20220907_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,GRY_P1_20221021_DUP,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
+NA,NA,NA,JKL_SIGNAL_20220728,NA,NA,No WQ data,No Zoop data,Complete SIF Analysis
