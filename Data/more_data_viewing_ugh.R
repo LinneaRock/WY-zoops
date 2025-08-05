@@ -40,3 +40,10 @@ raw21wq <- readxl::read_xlsx('Data/raw_data/2021_wq_data_long.xlsx') |>
 
 
 
+## working on location issues from 2021 data ####
+spatial <- readxl::read_xlsx('Data/raw_data/2021_wq_data_long.xlsx') |>
+  select(SiteID, Lat, Long, Date) |> 
+  #filter(Date%in%c('20210614'))|>
+  #filter(SiteID!='VIV_P3') |>
+  distinct() |>
+  drop_na()
