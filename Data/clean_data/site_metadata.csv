@@ -1,0 +1,46 @@
+Reservoir_FullName,Reservoir,Sample_Year,Site_ID,Combined_Res_Site_ID,Latitude,Longitude,Location,Res_Zone,Site_Name
+Alcova,ALC,2021,P1,ALC_P1,42.53261,-106.72639,Outlet,Lacustrine,ALC_Lacustrine
+Alcova,ALC,2021,P2,ALC_P2,42.52627,-106.7682,Middle,Transitional,ALC_Transitional
+Alcova,ALC,2021,P3,ALC_P3,42.518507,-106.761837,Inlet,Riverine,ALC_Riverine
+Alsop,ALS,2022,P1,ALS_P1,41.39194,-105.78807,Outlet,Lacustrine,ALS_Lacustrine
+Alsop,ALS,2022,P2,ALS_P2,41.39235,-105.79006,Middle,Transitional,ALS_Transitional
+Alsop,ALS,2022,P3,ALS_P3,41.39216,-105.79313,Inlet,Riverine,ALS_Riverine
+Boysen Reservoir,BOY,2022,RPD,BOY_RPD,43.277556,-108.1862972,Inlet,Riverine,BOY_Riverine
+Boysen Reservoir,BOY,2022,TPD,BOY_TPD,43.302967,-108.2018361,Middle,Transitional,BOY_Transitional
+Boysen Reservoir,BOY,2022,LPD,BOY_LPD,43.411997,-108.1767444,Outlet,Lacustrine,BOY_Lacustrine
+Fontenelle,FON,2021,P1,FON_P1,42.03394,-110.06505,Outlet,Lacustrine,FON_Lacustrine
+Fontenelle,FON,2021,P2,FON_P2,42.064163,-110.11707,Middle,Transitional,FON_Transitional
+Fontenelle,FON,2021,P3,FON_P3,42.0955184,-110.1343039,Inlet,Riverine,FON_Riverine
+Glendo,GLN,2021,P1,GLN_P1,42.524055,-104.95506,Outlet,Lacustrine,GLN_Lacustrine
+Glendo,GLN,2021,P2,GLN_P2,42.52326,-105.00218,Middle,Transitional,GLN_Transitional
+Glendo,GLN,2021,P3,GLN_P3,42.56969,-104.95869,Inlet,Riverine,GLN_Riverine
+Granite,GRN,2022,P1,GRN_P1,41.17656,-105.23855,Inlet,Riverine,GRN_Riverine
+Granite,GRN,2022,P2,GRN_P2,41.1768,-105.23328,Middle,Transitional,GRN_Transitional
+Granite,GRN,2022,P3,GRN_P3,41.17614,-105.22588,Outlet,Lacustrine,GRN_Lacustrine
+Grayrocks,GRY,2021,P1,GRY_P1,42.16383,-104.70957,Outlet,Lacustrine,GRY_Lacustrine
+Grayrocks,GRY,2021,P2,GRY_P2,42.15203,-104.7237,Middle,Transitional,GRY_Transitional
+Grayrocks,GRY,2021,P3,GRY_P3,42.14558,-104.7405,Inlet,Riverine,GRY_Riverine
+Grayrocks,GRY,2022,P3,GRY_P3,42.14539,-104.74028,Inlet,Riverine,GRY_Riverine
+Grayrocks,GRY,2022,P2,GRY_P2,42.15199,-104.7239,Middle,Transitional,GRY_Transitional
+Grayrocks,GRY,2022,P1,GRY_P1,42.16282,-104.70763,Outlet,Lacustrine,GRY_Lacustrine
+Guernsey,GUE,2021,P1,GUE_P1,42.31233,-104.80544,Outlet,Lacustrine,GUE_Lacustrine
+Guernsey,GUE,2021,P2,GUE_P2,42.32188,-104.82734,Transitional,Transitional,GUE_Transitional
+Guernsey,GUE,2021,P3,GUE_P3,42.33159,-104.82121,Inlet,Riverine,GUE_Riverine
+New Fork Lakes,NFL,2021,P1,NFL_P1,43.08886,-109.96169,Outlet,Lacustrine,NFL_Lacustrine
+New Fork Lakes,NFL,2021,P2,NFL_P2,43.09575,-109.94916,Middle,Transitional,NFL_Transitional
+New Fork Lakes,NFL,2021,P3,NFL_P3,43.10809,-109.91826,Inlet,Riverine,NFL_Riverine
+Pilot Butte,PIL,2021,P1,PIL_P1,43.2129714,-108.7822357,Inlet,Riverine,PIL_Riverine
+Pilot Butte,PIL,2021,P2,PIL_P2,43.20696,-108.77322,Transitional,Transitional,PIL_Transitional
+Pilot Butte,PIL,2021,P3,PIL_P3,43.200392,-108.76483,Outlet,Lacustrine,PIL_Lacustrine
+Saratoga,SAR,2022,P3,SAR_P3,41.47312606,-106.7867875,Outlet,Lacustrine,SAR_Lacustrine
+Saratoga,SAR,2022,P2,SAR_P2,41.46898608,-106.7824136,Middle,Transitional,SAR_Transitional
+Saratoga,SAR,2022,P1,SAR_P1,41.46225195,-106.78469,Inlet,Riverine,SAR_Riverine
+Viva Naughton,VIV,2021,P1,VIV_P1,41.99467,-110.664889,Inlet,Riverine,VIV_Riverine
+Viva Naughton,VIV,2021,P2,VIV_P2,41.984357,-110.66678,Middle,Transitional,VIV_Transitional
+Viva Naughton,VIV,2021,P3,VIV_P3,41.973394,-110.661614,Outlet,Lacustrine,VIV_Lacustrine
+Wheatland Reservoir 3,WHE,2021,P1,WHE_P1,41.89495,-105.71301,Inlet,Riverine,WHE_Riverine
+Wheatland Reservoir 3,WHE,2021,P2,WHE_P2,41.8815,-105.72276,Middle,Transitional,WHE_Transitional
+Wheatland Reservoir 3,WHE,2021,P3,WHE_P3,41.87276,-105.71924,Outlet,Lacustrine,WHE_Lacustrine
+Wheatland Reservoir 3,WHE,2022,P1,WHE_P1,41.89534,-105.71214,Inlet,Riverine,WHE_Riverine
+Wheatland Reservoir 3,WHE,2022,P2,WHE_P2,41.88158,-105.72202,Middle,Transitional,WHE_Transitional
+Wheatland Reservoir 3,WHE,2022,P3,WHE_P3,41.87276,-105.71924,Outlet,Lacustrine,WHE_Lacustrine
