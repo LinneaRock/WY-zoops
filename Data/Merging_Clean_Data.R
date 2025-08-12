@@ -62,13 +62,17 @@ sites <- read.csv('Data/clean_data/site_metadata.csv') |>
 
 HASWQ <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
   mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+  mutate(
+    unique_site = gsub(" ", "", unique_site)) |>
   select(unique_site) |>
   mutate(WQ='YES') |>
   distinct()
 
 
 HASCHL <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
-  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_'))|>
+  mutate(
+    unique_site = gsub(" ", "", unique_site)) |>
   filter(!is.na(chl_a_ugL)) |>
   select(unique_site) |>
   mutate(CHLA='YES') |>
@@ -78,6 +82,8 @@ HASCHL <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
 HASSI <- sif |>
   mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
   select(unique_site) |>
+  mutate(
+    unique_site = gsub(" ", "", unique_site)) |>
   mutate(SI='YES') |>
   distinct()
 
@@ -85,8 +91,10 @@ HASSI <- sif |>
 HASZOOP <- zoops |>
   mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
   select(unique_site) |>
+  mutate(
+    unique_site = gsub(" ", "", unique_site)) |>
   mutate(ZOOP='YES') |>
-  distinct()
+  distinct() 
 
 
 
