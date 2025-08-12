@@ -1,0 +1,126 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Merging data to see what we have 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+library(tidyverse)
+
+# read in data and average across duplicates 
+
+wq21 <- read.csv('Data/clean_data/2021_WQ_SS_clean.csv') |>
+  mutate(datecode=Collection_Date, 
+         Collection_Date = as.Date(as.character(Collection_Date), format='%Y%m%d')) |>
+  group_by(Reservoir_ID,Reservoir_Name,Site_ID,Collection_Date) |>
+  mutate(across(c(chl_a_ugL:WaterDepth_m), mean, na.rm=TRUE)) |>
+  ungroup() |>
+  select(-DUP) |>
+  distinct()
+
+wq22 <- read.csv('Data/clean_data/2022_WQ_AP_clean.csv')  |>
+  mutate(datecode=Collection_Date,
+         Collection_Date = as.Date(as.character(Collection_Date), format='%Y%m%d')) |>
+  group_by(Reservoir_ID,Site_ID,Collection_Date) |>
+  mutate(across(c(Temp_C:chl_a_ugL), mean, na.rm=TRUE)) |>
+  ungroup() |>
+  select(-DUP) |>
+  distinct()
+
+zoops <- read.csv('Data/clean_data/2122_Zoops_AP_clean.csv') |>
+  mutate(Collection_Date=as.Date(Collection_Date, format='%m/%d/%Y'),
+         datecode=format(Collection_Date, '%Y%m%d')) |>
+  select(-c(X,Site_ID_pseudonym,Sample_ID,FTG_Combined,Trophic_Group_General)) |>
+  group_by(Reservoir_ID, Reservoir_Name,Site_ID,Collection_Date,Species_Name, Functional_Group,Trophic_Group,Feeding_Type) |>
+  mutate(across(c(biomass_ugL, Count, Size), mean, na.rm=TRUE)) |>
+  ungroup() |>
+  select(-DUP) |>
+  distinct()
+
+sif <- read.csv('Data/clean_data/SIF_data_20250626_LipidCorrected.csv') |>
+  separate_wider_delim(
+    cols = Sample_ID,
+    delim = "_",
+    names = c("Reservoir_ID", "Site_ID", "Collection_Date", "Extra_Info"),
+    too_few = "align_start",
+    too_many = "merge"   # merge everything after the 3rd underscore
+  ) |>
+  mutate(datecode=Collection_Date,
+    Collection_Date = as.Date(Collection_Date, format = "%Y%m%d")
+  ) |>
+  group_by(Reservoir_ID, Site_ID,Collection_Date) |>
+  mutate(across(c(percent_N:d34S), mean, na.rm=TRUE)) |>
+  ungroup() |>
+  select(-c(Extra_Info, Notes, C_N_ratio, perc_lipid, d13C_corrected)) |>
+  filter(!is.na(Collection_Date))
+
+
+sites <- read.csv('Data/clean_data/site_metadata.csv') |>
+  rename(Reservoir_Name=Reservoir_FullName,
+         Reservoir_ID=Reservoir) |>
+  select(-c(Sample_Year, Combined_Res_Site_ID, Location))
+
+
+
+
+HASWQ <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
+  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+  select(unique_site) |>
+  mutate(WQ='YES') |>
+  distinct()
+
+
+HASCHL <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
+  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+  filter(!is.na(chl_a_ugL)) |>
+  select(unique_site) |>
+  mutate(CHLA='YES') |>
+  distinct()
+
+
+HASSI <- sif |>
+  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+  select(unique_site) |>
+  mutate(SI='YES') |>
+  distinct()
+
+
+HASZOOP <- zoops |>
+  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+  select(unique_site) |>
+  mutate(ZOOP='YES') |>
+  distinct()
+
+
+
+ALL_CURRENT_DATA <- full_join(HASWQ,HASCHL) |>
+  full_join(HASSI) |>
+  full_join(HASZOOP) |>
+  distinct() |>
+  mutate(
+    COMPLETE = if_else(if_all(WQ:ZOOP, ~ !is.na(.)), "YES", "no")
+  ) |>
+  mutate(Needs_CHLA = ifelse(is.na(CHLA),"YES","no")) |>
+  mutate(Needs_SIA = ifelse(is.na(SI), "YES","no")) |>
+  mutate(Needs_WQ = ifelse(is.na(WQ), "YES", "no")) |>
+  mutate(Needs_ZOOP = ifelse(is.na(ZOOP), "YES", "no"))
+
+
+
+
+notes <- readxl::read_xlsx('Archive/DataArchive/FULL_DATA_REPORT_withnotes.xlsx', 'Sheet2') |>
+  select(-c(Reservior,ReservoirCode,Site,Year,Month,Day,)) |>
+  separate_wider_delim(
+  cols = Sample_ID,
+  delim = "_",
+  names = c("Reservoir_ID", "Site_ID", "deletedate", "Extra_Info"),
+  too_few = "align_start",
+  too_many = "merge"   # merge everything after the 3rd underscore
+) |>
+  mutate(datecode=format(Collection_Date, '%Y%m%d'),
+         Collection_Date = as.Date(Collection_Date)
+  ) |>
+  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+  mutate(
+    unique_site = gsub(" ", "", unique_site)) |>
+  select(unique_site, `Linnea/Nicole Comments`, `GET WQ`) |>
+  full_join(ALL_CURRENT_DATA)
+
+write.csv(notes,'Data/New_Data.Report.csv')
