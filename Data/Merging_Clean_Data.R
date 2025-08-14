@@ -49,7 +49,8 @@ sif <- read.csv('Data/clean_data/SIF_data_20250626_LipidCorrected.csv') |>
   mutate(across(c(percent_N:d34S), mean, na.rm=TRUE)) |>
   ungroup() |>
   select(-c(Extra_Info, Notes, C_N_ratio, perc_lipid, d13C_corrected)) |>
-  filter(!is.na(Collection_Date))
+  filter(!is.na(Collection_Date)) |>
+  distinct()
 
 
 sites <- read.csv('Data/clean_data/site_metadata.csv') |>
@@ -68,6 +69,9 @@ HASWQ <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
   mutate(WQ='YES') |>
   distinct()
 
+table(HASWQ$unique_site) > 1
+
+
 
 HASCHL <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
   mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_'))|>
@@ -78,6 +82,8 @@ HASCHL <- bind_rows(wq21,wq22) |> select(-Reservoir_Name) |>
   mutate(CHLA='YES') |>
   distinct()
 
+table(HASCHL$unique_site) > 1
+
 
 HASSI <- sif |>
   mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
@@ -87,6 +93,8 @@ HASSI <- sif |>
   mutate(SI='YES') |>
   distinct()
 
+table(HASSI$unique_site) > 1
+
 
 HASZOOP <- zoops |>
   mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
@@ -95,6 +103,8 @@ HASZOOP <- zoops |>
     unique_site = gsub(" ", "", unique_site)) |>
   mutate(ZOOP='YES') |>
   distinct() 
+
+table(HASZOOP$unique_site) > 1 
 
 
 
@@ -110,25 +120,33 @@ ALL_CURRENT_DATA <- full_join(HASWQ,HASCHL) |>
   mutate(Needs_WQ = ifelse(is.na(WQ), "YES", "no")) |>
   mutate(Needs_ZOOP = ifelse(is.na(ZOOP), "YES", "no"))
 
+table(ALL_CURRENT_DATA$unique_site) > 1
 
 
+# notes <- readxl::read_xlsx('Archive/DataArchive/FULL_DATA_REPORT_withnotes.xlsx', 'Sheet2') |>
+#   select(-c(Reservior,ReservoirCode,Site,Year,Month,Day,)) |>
+#   separate_wider_delim(
+#   cols = Sample_ID,
+#   delim = "_",
+#   names = c("Reservoir_ID", "Site_ID", "deletedate", "Extra_Info"),
+#   too_few = "align_start",
+#   too_many = "merge"   # merge everything after the 3rd underscore
+# ) |>
+#   mutate(datecode=format(Collection_Date, '%Y%m%d'),
+#          Collection_Date = as.Date(Collection_Date)
+#   ) |>
+#   mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
+#   mutate(
+#     unique_site = gsub(" ", "", unique_site)) |>
+#   select(unique_site, `Linnea/Nicole Comments`, `GET WQ`) |>
+#   full_join(ALL_CURRENT_DATA)
 
-notes <- readxl::read_xlsx('Archive/DataArchive/FULL_DATA_REPORT_withnotes.xlsx', 'Sheet2') |>
-  select(-c(Reservior,ReservoirCode,Site,Year,Month,Day,)) |>
-  separate_wider_delim(
-  cols = Sample_ID,
-  delim = "_",
-  names = c("Reservoir_ID", "Site_ID", "deletedate", "Extra_Info"),
-  too_few = "align_start",
-  too_many = "merge"   # merge everything after the 3rd underscore
-) |>
-  mutate(datecode=format(Collection_Date, '%Y%m%d'),
-         Collection_Date = as.Date(Collection_Date)
-  ) |>
-  mutate(unique_site = paste(Reservoir_ID, Site_ID, datecode, sep='_')) |>
-  mutate(
-    unique_site = gsub(" ", "", unique_site)) |>
-  select(unique_site, `Linnea/Nicole Comments`, `GET WQ`) |>
-  full_join(ALL_CURRENT_DATA)
+
+notes <- readxl::read_xlsx('Data/New_Data.Report_notes.xlsx', '20250812') |>
+  select(unique_site, Reservoir_ID, Site_ID, datecode, `Linnea/Nicole Comments - incl. new comments`, `FIND SAMPLE`, `GET WQ`) |>
+  full_join(ALL_CURRENT_DATA) |>
+  filter(`Linnea/Nicole Comments - incl. new comments` != 'duplicate')
+
+table(notes$unique_site) > 1 
 
 write.csv(notes,'Data/New_Data.Report.csv')
