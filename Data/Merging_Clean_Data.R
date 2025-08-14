@@ -14,18 +14,14 @@ chl21 <- read.csv('Data/raw_data/chl_data_2021_final.csv') |>
   mutate(Collection_Date = as.Date(as.character(Collection_Date), format='%Y%m%d')) |>
   select(Reservoir_ID, Site_ID, Collection_Date, chl_a_ugL)
 
-chk <-wq21 <- read.csv('Data/clean_data/2021_WQ_SS_clean.csv') 
 
 wq21 <- read.csv('Data/clean_data/2021_WQ_SS_clean.csv') |>
   mutate(datecode=Collection_Date, 
          Collection_Date = as.Date(as.character(Collection_Date), format='%Y%m%d')) |>
-  rename(chl_from_raw = chl_a_ugL) |>
-  left_join(chl21)
-  
-  
-  
+ select(-chl_a_ugL) |> # I trust the chla 2021 datasheet more than what was in the daily sample logs
+  left_join(chl21) |>
   group_by(Reservoir_ID,Reservoir_Name,Site_ID,Collection_Date) |>
-  mutate(across(c(chl_a_ugL:WaterDepth_m), mean, na.rm=TRUE)) |>
+  mutate(across(c(Temp_C:chl_a_ugL), mean, na.rm=TRUE)) |>
   ungroup() |>
   select(-DUP) |>
   distinct()
@@ -157,7 +153,7 @@ table(ALL_CURRENT_DATA$unique_site) > 1
 #   full_join(ALL_CURRENT_DATA)
 
 
-notes <- readxl::read_xlsx('Data/New_Data.Report_notes.xlsx', '20250812') |>
+notes <- readxl::read_xlsx('Data/New_Data.Report_notes.xlsx', '20250813') |>
   select(unique_site, Reservoir_ID, Site_ID, datecode, `Linnea/Nicole Comments - incl. new comments`, `FIND SAMPLE`, `GET WQ`) |>
   full_join(ALL_CURRENT_DATA) |>
   filter(`Linnea/Nicole Comments - incl. new comments` != 'duplicate')
