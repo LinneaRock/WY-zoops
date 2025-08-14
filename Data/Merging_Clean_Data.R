@@ -5,10 +5,25 @@
 library(tidyverse)
 
 # read in data and average across duplicates 
+chl21 <- read.csv('Data/raw_data/chl_data_2021_final.csv') |>
+  mutate(Reservoir_ID = substr(lake_id, 1, 3)) |>
+  rename(chl_a_ugL=chl_a..ug.L.,
+         Site_ID = siteID,
+         Collection_Date = Date) |>
+  mutate(chl_a_ugL=as.numeric(chl_a_ugL)) |>
+  mutate(Collection_Date = as.Date(as.character(Collection_Date), format='%Y%m%d')) |>
+  select(Reservoir_ID, Site_ID, Collection_Date, chl_a_ugL)
+
+chk <-wq21 <- read.csv('Data/clean_data/2021_WQ_SS_clean.csv') 
 
 wq21 <- read.csv('Data/clean_data/2021_WQ_SS_clean.csv') |>
   mutate(datecode=Collection_Date, 
          Collection_Date = as.Date(as.character(Collection_Date), format='%Y%m%d')) |>
+  rename(chl_from_raw = chl_a_ugL) |>
+  left_join(chl21)
+  
+  
+  
   group_by(Reservoir_ID,Reservoir_Name,Site_ID,Collection_Date) |>
   mutate(across(c(chl_a_ugL:WaterDepth_m), mean, na.rm=TRUE)) |>
   ungroup() |>
