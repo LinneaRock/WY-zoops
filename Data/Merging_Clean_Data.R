@@ -59,10 +59,16 @@ sif <- read.csv('Data/clean_data/SIF_data_20250626_LipidCorrected.csv') |>
   group_by(Reservoir_ID, Site_ID,Collection_Date) |>
   mutate(across(c(percent_N:d34S), mean, na.rm=TRUE)) |>
   ungroup() |>
-  select(-c(Extra_Info, Notes, C_N_ratio, perc_lipid, d13C_corrected)) |>
+  select(-c(Extra_Info, Notes, C_N_ratio, perc_lipid, d13C_corrected)) |>  
   filter(!is.na(Collection_Date)) |>
-  distinct()
-
+  distinct() |>
+  #fixing mislabeled dates
+  mutate(Collection_Date=ifelse(Reservoir_ID=='ALS' & Collection_Date==as.Date('2022-07-25'), as.Date('2022-07-15'), Collection_Date)) |>
+  mutate(Collection_Date=as.Date(Collection_Date)) |>
+  mutate(datecode=ifelse(Reservoir_ID=='ALS' & Collection_Date==as.Date('2022-07-15'), '20220715', datecode)) |>
+  mutate(Collection_Date=ifelse(Reservoir_ID=='WHE' & Collection_Date==as.Date('2021-07-01'), as.Date('2021-07-07'), Collection_Date)) |>
+  mutate(Collection_Date=as.Date(Collection_Date)) |>
+  mutate(datecode=ifelse(Reservoir_ID=='ALS' & Collection_Date==as.Date('2021-07-07'), '20210707', datecode)) 
 
 sites <- read.csv('Data/clean_data/site_metadata.csv') |>
   rename(Reservoir_Name=Reservoir_FullName,
