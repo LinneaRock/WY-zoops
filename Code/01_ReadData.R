@@ -4,6 +4,7 @@
 
 library(tidyverse)
 
+
 sites <- read.csv('Data/clean_data/site_metadata.csv') |>
   rename(Reservoir_Name=Reservoir_FullName,
          Reservoir_ID=Reservoir) |>
@@ -86,8 +87,11 @@ sif <- read.csv('Data/clean_data/SIF_data_20250626_LipidCorrected.csv') |>
   left_join(sites)
 
 
+# NOTE:
+# Need to get lipid correction calculations from Willie + citation for that 
 
 
-
+sites_sf <- sf::st_read('Data/clean_data/Spatial/WY_NHD.gpkg', layer='sites_sf')
+lakes_sf <- sf::st_read('Data/clean_data/Spatial/WY_NHD.gpkg', layer='WY_NHD')
 
 
