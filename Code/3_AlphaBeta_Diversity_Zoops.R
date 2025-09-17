@@ -82,14 +82,17 @@ abundances |>
 
 # create distance matrix of zoop communities
 dist_zoop <- zoops |>
+  filter(Reservoir_ID != 'OCE') |>
   mutate(Group=paste(Site_Name, datecode, sep="_")) |>
   select(Group, Species_Name, biomass_ugL) |>
+  distinct() |>
+  filter(!Group %in% c(removal$Group)) |>
+  drop_na() |>
   pivot_wider(
     names_from = Species_Name,
-    values_from = biomass_ugL,
-    values_fn = sum,        # collapse duplicates
-    values_fill = 0         # replace NA/NULL with 0
-  ) |> as.data.frame()
+    values_from = biomass_ugL
+  ) |> 
+  as.data.frame()
 rownames(dist_zoop) <- dist_zoop$Group
 dist_zoop <- dist_zoop[,-1]
 dist_zoop <- as.matrix(dist_zoop)
@@ -120,8 +123,8 @@ adonis2(dist~Longitude, metadata)
 set.seed(69420)
 nmds <- metaMDS(dist)
 nmds
-# make note of the stress value, this shows how easy it was to condense multidimensional data into two dimensional space, below 0.2 is generally good -- 0.18 
-# hmmm, we may not have enough data to perform NMDS
+# make note of the stress value, this shows how easy it was to condense multidimensional data into two dimensional space, below 0.2 is generally good -- 0.1846036 
+# hmmm, not very good?
 
 # pull out scores for beautiful plotting
 scores <- scores(nmds) |>
@@ -129,13 +132,30 @@ scores <- scores(nmds) |>
   # and join to metadata
   left_join(metadata)
 
+# go back and remove these from NMDS and re-run
+removal <- scores |>
+  filter(is.na(Reservoir_Name)) |>
+  select(Group)
 
 
 scores |>
-  filter(NMDS1<1000) |>
+  #filter(NMDS1<1000) |>
   ggplot(aes(x=NMDS1, y=NMDS2)) +
   geom_point(aes(fill=Reservoir_Name),size=2,shape=21) +
   theme_minimal() +
-  scale_fill_viridis_d('', option='magma') +
- # geom_text(label='dist~location \np = 0.97', mapping = aes(x = 1, y = 2)) +
-  theme(legend.position = 'none')
+  scale_fill_viridis_d('', option='magma') 
+
+scores |>
+  #filter(NMDS1<1000) |>
+  ggplot(aes(x=NMDS1, y=NMDS2)) +
+  geom_point(aes(fill=as.factor(Month)),size=2,shape=21) +
+  theme_minimal() +
+  scale_fill_viridis_d('Month') 
+
+
+scores |>
+  #filter(NMDS1<1000) |>
+  ggplot(aes(x=NMDS1, y=NMDS2)) +
+  geom_point(aes(fill=Res_Zone),size=2,shape=21) +
+  theme_minimal() +
+  scale_fill_viridis_d('') 
