@@ -6,6 +6,12 @@ source('Code/01_ReadData.R')
 
 library(vegan)
 
+library(khroma)
+plot_scheme(color('muted')(9), colours = TRUE, names = TRUE, size = 0.9)
+lake_pal <- c('black', 'grey30', color('muted')(9), 'grey50', '#DDDDDD')
+zone_pal <- c('#FEDA8B','#EAECCC','#C2E4EF')
+
+
 # prepare dataframes ####
 sites_norepeats <- sites |>
   group_by(Reservoir_Name,Reservoir_ID, Res_Zone, Site_Name) |>
@@ -31,6 +37,7 @@ metadata <- left_join(water_quality |> mutate(datecode=as.numeric(datecode)),sif
 
 # relative abundance at each sampling event (site and date)
 zoop_rel_abund <- zoops |>
+  filter(!is.na(Reservoir_Name)) |>
   mutate(Group=paste(Site_Name, datecode, sep="_")) |>
   select(Group, Species_Name, biomass_ugL) |>
   drop_na() |>
@@ -74,11 +81,34 @@ abundances |>
   theme_classic() +
   labs(y=NULL,
        x="Relative Abundance (%)") +
-  theme(legend.position = c(0.8,0.35)) 
+  theme(legend.position = c(0.8,0.35)) +
+  scale_color_manual('',values=lake_pal) +
+  scale_fill_manual('',values=lake_pal)
+ggsave('Figures/Exploration/Rel_abund.png',height=6.5,width=6.5,dpi=1200)
+
+all_spp <- zoops |> filter(!is.na(Reservoir_Name)) |> select(Count, Species_Name) |> drop_na() |> select(Species_Name) |> distinct()
 
 
 # Beta diversity analysis ####
 # answers questions related to how different communities are from each other 
+
+# from running first time - need to manually remove some groups
+removal <- c('ALS_Transitional_20220603',
+             'ALS_Riverine_20220603'    ,
+             'GRN_Riverine_20220701'    ,
+             'GRN_Transitional_20220701',
+             'GRN_Lacustrine_20220701'  ,
+             'NFL_Lacustrine_20210817'  ,
+             'NFL_Lacustrine_20210914'  ,
+             'NFL_Lacustrine_20211019'  ,
+             'NFL_Transitional_20210720',
+             'NFL_Transitional_20210817',
+             'NFL_Transitional_20210914',
+             'NFL_Transitional_20211019',
+             'NFL_Riverine_20210720'    ,
+             'NFL_Riverine_20210817'    ,
+             'NFL_Riverine_20210914'    ,
+             'NFL_Riverine_20211019' )
 
 # create distance matrix of zoop communities
 dist_zoop <- zoops |>
@@ -86,7 +116,7 @@ dist_zoop <- zoops |>
   mutate(Group=paste(Site_Name, datecode, sep="_")) |>
   select(Group, Species_Name, biomass_ugL) |>
   distinct() |>
-  filter(!Group %in% c(removal$Group)) |>
+  filter(!Group %in% c(removal)) |>
   drop_na() |>
   pivot_wider(
     names_from = Species_Name,
@@ -130,26 +160,33 @@ nmds
 scores <- scores(nmds) |>
   as_tibble(rownames='Group') |>
   # and join to metadata
-  left_join(metadata)
+  left_join(metadata)  |>
+  left_join(lakes_sf |> as.data.frame() |> select(Reservoir_Name,gnis_name)) |>
+  mutate(Res_Zone=factor(Res_Zone, levels=c('Riverine', 'Transitional', 'Lacustrine')))
 
-# go back and remove these from NMDS and re-run
-removal <- scores |>
-  filter(is.na(Reservoir_Name)) |>
-  select(Group)
+# # go back and remove these from NMDS and re-run
+# removal <- scores |>
+#   filter(is.na(Reservoir_Name)) |>
+#   select(Group)
+# # pull these out manually & bring them back up to the top of beta diversity
+# removal
+
+
 
 
 scores |>
   #filter(NMDS1<1000) |>
   ggplot(aes(x=NMDS1, y=NMDS2)) +
-  geom_point(aes(fill=Reservoir_Name),size=2,shape=21) +
-  theme_minimal() +
-  scale_fill_viridis_d('', option='magma') 
+  geom_point(aes(fill=gnis_name),size=2,shape=21) +
+  theme_bw() +
+  scale_fill_manual('', values=lake_pal)
+ggsave('Figures/Exploration/NMDS_lakes.png',height=4.5,width=6.5,dpi=1200)
 
 scores |>
   #filter(NMDS1<1000) |>
   ggplot(aes(x=NMDS1, y=NMDS2)) +
   geom_point(aes(fill=as.factor(Month)),size=2,shape=21) +
-  theme_minimal() +
+  theme_bw() +
   scale_fill_viridis_d('Month') 
 
 
@@ -157,5 +194,35 @@ scores |>
   #filter(NMDS1<1000) |>
   ggplot(aes(x=NMDS1, y=NMDS2)) +
   geom_point(aes(fill=Res_Zone),size=2,shape=21) +
-  theme_minimal() +
-  scale_fill_viridis_d('') 
+  theme_bw() +
+  scale_fill_manual('', values=zone_pal)
+ggsave('Figures/Exploration/NMDS_zones.png',height=4.5,width=6.5,dpi=1200)
+
+
+
+## Intrinsic variables ####
+# investigate the species which drive the distance distribution 
+set.seed(69420)
+spp.fit <- envfit(nmds, dist_zoop, permutations=999)
+head(spp.fit)
+
+
+
+spp.fit_df <- as.data.frame(scores(spp.fit, display='vectors'))  #extracts relevant scores from sppfit
+spp.fit_df <- cbind(spp.fit_df, spp.variables = rownames(spp.fit_df)) #and then gives them their names
+
+spp.fit_df <- cbind(spp.fit_df, pval = spp.fit$vectors$pvals) # add pvalues to dataframe
+sig.spp.fit <- subset(spp.fit_df, pval<=0.05) #subset data to show significant variables
+
+sig.spp.fit
+
+#Now we have the relevant information for plotting the ordination!
+ggplot() +
+  geom_point(scores, mapping=aes(x=NMDS1, y=NMDS2), color='grey50') +
+  theme_bw() +
+  geom_segment(sig.spp.fit, mapping=aes(x=0, xend=NMDS1*2, y=0, yend=NMDS2*2), arrow = arrow(length = unit(0.25, "cm")), colour = "grey10", lwd=0.3) + #add vector arrows of significant species
+  ggrepel::geom_text_repel(sig.spp.fit, mapping=aes(x=NMDS1*2, y=NMDS2*2, label = spp.variables), cex = 4, direction = "both", segment.size = 0.25) + #add labels, use ggrepel::geom_text_repel so that labels do not overlap
+  theme(legend.position= 'none')
+ggsave('Figures/Exploration/NMDS_intrinsic.png',height=4.5,width=6.5,dpi=1200)
+
+
