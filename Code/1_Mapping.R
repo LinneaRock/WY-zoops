@@ -8,7 +8,7 @@ source('Code/01_ReadData.R')
 
 library(khroma)
 plot_scheme(color('muted')(9), colours = TRUE, names = TRUE, size = 0.9)
-lake_pal <- c('black', 'grey30', color('muted')(9), 'grey50', '#DDDDDD')
+lake_pal <- setNames(c('black', 'grey30', color('muted')(9), 'grey50', '#DDDDDD'), levels(lakes_sf$gnis_name))
 
 WY <- map_data('state') |>
   filter(region=='wyoming')

@@ -8,7 +8,7 @@ library(vegan)
 
 library(khroma)
 plot_scheme(color('muted')(9), colours = TRUE, names = TRUE, size = 0.9)
-lake_pal <- c('black', 'grey30', color('muted')(9), 'grey50', '#DDDDDD')
+#lake_pal <- c('black', 'grey30', color('muted')(9), 'grey50', '#DDDDDD')
 zone_pal <- c('#FEDA8B','#EAECCC','#C2E4EF')
 
 
@@ -17,6 +17,7 @@ sites_norepeats <- sites |>
   group_by(Reservoir_Name,Reservoir_ID, Res_Zone, Site_Name) |>
   summarise(Latitude=mean(Latitude),
             Longitude=mean(Longitude)) |>
+  full_join(lakes_sf |> select(Reservoir_Name,gnis_name)) |>
   ungroup()
 
 metadata <- left_join(water_quality |> mutate(datecode=as.numeric(datecode)),sif|> mutate(datecode=as.numeric(datecode))) |>
@@ -25,7 +26,7 @@ metadata <- left_join(water_quality |> mutate(datecode=as.numeric(datecode)),sif
          Year=year(Collection_Date),
          Month=month(Collection_Date),
          JulianDay=yday(Collection_Date)) |>
-  left_join(sites_norepeats) |>
+  full_join(sites_norepeats) |>
   select(Group, Reservoir_Name, Res_Zone, Year, Month, JulianDay, Latitude, Longitude, percent_N:d34S, Temp_C:WaterDepth_m, chl_a_ugL) |>
   distinct()
   # needs to be filtered more when running analyses that require complete entries
@@ -65,8 +66,11 @@ mutate(Species_Name = if_else(pool, "Other", Species_Name)) |>
   summarise(rel_abund=sum(rel_abund),
             mean = min(mean),
             .groups="drop") |>
-  drop_na(Species_Name)
+  drop_na(Species_Name) |>
+  full_join(lakes_sf |> as.data.frame() |> select(Reservoir_Name,gnis_name))
  
+lake_pal <- setNames(c('black', 'grey30', color('muted')(9), 'grey50', '#DDDDDD'), levels(abundances$gnis_name))
+
 
 #Taxonomy Line Plot - aggregated over all time within each lake
 abundances |>
@@ -74,7 +78,7 @@ abundances |>
   arrange(desc(mean)) |>
   mutate(Species_Name=factor(Species_Name)) |>
   #filter(mean>5) |> # annoying filter just to make plot less complicated by removing the lowest taxa
-  ggplot(aes(rel_abund, reorder(Species_Name, rel_abund), fill=Reservoir_Name, color=Reservoir_Name)) +
+  ggplot(aes(rel_abund, reorder(Species_Name, rel_abund), fill=gnis_name, color=gnis_name)) +
   stat_summary(fun.data=median_hilow, geom = "pointrange",
                fun.args=list(conf.int=0.5),
                position = position_dodge(width=0.6), shape=21) +
@@ -128,6 +132,9 @@ dist_zoop <- dist_zoop[,-1]
 dist_zoop <- as.matrix(dist_zoop)
 dist_zoop <- replace(dist_zoop, is.na(dist_zoop), 0)
 
+
+#   Distance Matrix:calculates a distance matrix that quantifies the dissimilarity between all pairs of samples based on their multivariate data. In your case, this could be a measure of how different the zooplankton communities are from each other.
+
 dist <- vegdist(dist_zoop, method = 'bray')
 
 dist
@@ -136,10 +143,10 @@ dist
 # PERMANOVA  with adonis2 can help test relationships between metadata and community composition
 
 #   PERMANOVA is a statistical test used to compare the differences between groups of multivariate data.
-# It is particularly useful when you have complex data with many variables and you want to see if the composition of these variables differs significantly between groups.
+# It is useful when you have complex data with many variables and you want to see if the composition of these variables differs significantly between groups.
 
-#   Distance Matrix: First, it calculates a distance matrix that quantifies the dissimilarity between all pairs of samples based on their multivariate data. In your case, this could be a measure of how different the zooplankton communities are from each other.
-# Permutations: It then permutes (randomly rearranges) the data many times to create a distribution of possible outcomes under the null hypothesis (that there are no differences between groups).
+
+# Permutations: permutes (randomly rearranges) the data many times to create a distribution of possible outcomes under the null hypothesis (that there are no differences between groups).
 # Comparison: It compares the observed differences between groups to this distribution to determine if the observed differences are statistically significant.
 
 #   Unlike traditional ANOVA, PERMANOVA is nonparametric (i.e., it does not assume normal distribution of the data), making it suitable for ecological data, which often do not meet these assumptions.
@@ -161,7 +168,7 @@ scores <- scores(nmds) |>
   as_tibble(rownames='Group') |>
   # and join to metadata
   left_join(metadata)  |>
-  left_join(lakes_sf |> as.data.frame() |> select(Reservoir_Name,gnis_name)) |>
+  full_join(lakes_sf |> as.data.frame() |> select(Reservoir_Name,gnis_name)) |>
   mutate(Res_Zone=factor(Res_Zone, levels=c('Riverine', 'Transitional', 'Lacustrine')))
 
 # # go back and remove these from NMDS and re-run
@@ -171,7 +178,7 @@ scores <- scores(nmds) |>
 # # pull these out manually & bring them back up to the top of beta diversity
 # removal
 
-
+lake_pal <- setNames(c('black', 'grey30', color('muted')(9), 'grey50', '#DDDDDD'), levels(scores$gnis_name))
 
 
 scores |>
@@ -191,6 +198,7 @@ scores |>
 
 
 scores |>
+  drop_na(Res_Zone) |>
   #filter(NMDS1<1000) |>
   ggplot(aes(x=NMDS1, y=NMDS2)) +
   geom_point(aes(fill=Res_Zone),size=2,shape=21) +
@@ -224,5 +232,20 @@ ggplot() +
   ggrepel::geom_text_repel(sig.spp.fit, mapping=aes(x=NMDS1*2, y=NMDS2*2, label = spp.variables), cex = 4, direction = "both", segment.size = 0.25) + #add labels, use ggrepel::geom_text_repel so that labels do not overlap
   theme(legend.position= 'none')
 ggsave('Figures/Exploration/NMDS_intrinsic.png',height=4.5,width=6.5,dpi=1200)
+
+
+# # basics: trophic grouping ####
+# zoops_tg <- zoops |>
+#   drop_na(biomass_ugL) |>
+#   mutate(Trophic_Group = ifelse(is.na(Trophic_Group) & 
+#                                   Functional_Group=='Nauplii',
+#                                 '(nauplii)', Trophic_Group)) |>
+#   left_join(lakes_sf |> as.data.frame() |> select(Reservoir_Name, gnis_name))
+# 
+# ggplot(zoops_tg) +
+#   geom_bar(aes(Collection_Date, biomass_ugL, fill=Trophic_Group), stat='identity') +
+#   facet_wrap(~gnis_name, scales='free')
+  
+
 
 
