@@ -221,6 +221,21 @@ scores |>
   theme_bw() +
   scale_fill_viridis_c('Latitude') 
 
+
+scores |>
+  #filter(NMDS1<1000) |>
+  ggplot(aes(x=NMDS1, y=NMDS2)) +
+  geom_point(aes(fill=chl_a_ugL),size=2,shape=21) +
+  theme_bw() +
+  scale_fill_viridis_c()
+
+
+
+
+
+
+
+
 ## Intrinsic variables ####
 # investigate the species which drive the distance distribution 
 set.seed(69420)
