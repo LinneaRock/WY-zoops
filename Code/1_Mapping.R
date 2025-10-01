@@ -42,21 +42,21 @@ ggplot() +
   geom_sf(sif_average, mapping=aes(fill=meand15N,color=meand15N)) +
   scale_fill_viridis_c('Average'~delta^15~N)+ scale_color_viridis_c('Average'~delta^15~N) + 
   theme_bw()
-ggsave('Figures/Exploration/averageNmap.png',height=4.5,width=6.5,dpi=1200)
+ggsave('Figures/Exploration/StableIsotopes/averageNmap.png',height=4.5,width=6.5,dpi=1200)
 
 ggplot() +
  # geom_polygon(WY, mapping=aes(long, lat), fill='white', color='black') +
   geom_sf(sif_average, mapping=aes(fill=meand13C, color=meand13C)) +
   scale_fill_viridis_c('Average'~delta^13~C) + scale_color_viridis_c('Average'~delta^13~C) + 
   theme_bw() 
-ggsave('Figures/Exploration/averageCmap.png',height=4.5,width=6.5,dpi=1200)
+ggsave('Figures/Exploration/StableIsotopes/averageCmap.png',height=4.5,width=6.5,dpi=1200)
 
 ggplot() +
   # geom_polygon(WY, mapping=aes(long, lat), fill='white', color='black') +
   geom_sf(sif_average, mapping=aes(fill=meand34S, color=meand34S)) +
   scale_fill_viridis_c('Average'~delta^34~S)+ scale_color_viridis_c('Average'~delta^34~S) +
   theme_bw()
-ggsave('Figures/Exploration/averageSmap.png',height=4.5,width=6.5,dpi=1200)
+ggsave('Figures/Exploration/StableIsotopes/averageSmap.png',height=4.5,width=6.5,dpi=1200)
 
 
 sif_average_sites <- sif |>

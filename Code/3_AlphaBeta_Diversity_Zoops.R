@@ -88,7 +88,7 @@ abundances |>
   theme(legend.position = c(0.8,0.35)) +
   scale_color_manual('',values=lake_pal) +
   scale_fill_manual('',values=lake_pal)
-ggsave('Figures/Exploration/Rel_abund.png',height=6.5,width=6.5,dpi=1200)
+ggsave('Figures/Exploration/Zoops/Rel_abund.png',height=6.5,width=6.5,dpi=1200)
 
 all_spp <- zoops |> filter(!is.na(Reservoir_Name)) |> select(Count, Species_Name) |> drop_na() |> select(Species_Name) |> distinct()
 
@@ -187,7 +187,7 @@ scores |>
   geom_point(aes(fill=gnis_name),size=2,shape=21) +
   theme_bw() +
   scale_fill_manual('', values=lake_pal)
-ggsave('Figures/Exploration/NMDS_lakes.png',height=4.5,width=6.5,dpi=1200)
+ggsave('Figures/Exploration/Zoops/NMDS_lakes.png',height=4.5,width=6.5,dpi=1200)
 
 scores |>
   #filter(NMDS1<1000) |>
@@ -204,9 +204,22 @@ scores |>
   geom_point(aes(fill=Res_Zone),size=2,shape=21) +
   theme_bw() +
   scale_fill_manual('', values=zone_pal)
-ggsave('Figures/Exploration/NMDS_zones.png',height=4.5,width=6.5,dpi=1200)
+ggsave('Figures/Exploration/Zoops/NMDS_zones.png',height=4.5,width=6.5,dpi=1200)
 
+scores |>
+  #filter(NMDS1<1000) |>
+  ggplot(aes(x=NMDS1, y=NMDS2)) +
+  geom_point(aes(fill=Longitude),size=2,shape=21) +
+  theme_bw() +
+  scale_fill_viridis_c('Longitude') 
+ggsave('Figures/Exploration/Zoops/NMDS_longitude.png',height=4.5,width=6.5,dpi=1200)
 
+scores |>
+  #filter(NMDS1<1000) |>
+  ggplot(aes(x=NMDS1, y=NMDS2)) +
+  geom_point(aes(fill=Latitude),size=2,shape=21) +
+  theme_bw() +
+  scale_fill_viridis_c('Latitude') 
 
 ## Intrinsic variables ####
 # investigate the species which drive the distance distribution 
@@ -231,21 +244,36 @@ ggplot() +
   geom_segment(sig.spp.fit, mapping=aes(x=0, xend=NMDS1*2, y=0, yend=NMDS2*2), arrow = arrow(length = unit(0.25, "cm")), colour = "grey10", lwd=0.3) + #add vector arrows of significant species
   ggrepel::geom_text_repel(sig.spp.fit, mapping=aes(x=NMDS1*2, y=NMDS2*2, label = spp.variables), cex = 4, direction = "both", segment.size = 0.25) + #add labels, use ggrepel::geom_text_repel so that labels do not overlap
   theme(legend.position= 'none')
-ggsave('Figures/Exploration/NMDS_intrinsic.png',height=4.5,width=6.5,dpi=1200)
+ggsave('Figures/Exploration/Zoops/NMDS_intrinsic.png',height=4.5,width=6.5,dpi=1200)
 
 
-# # basics: trophic grouping ####
-# zoops_tg <- zoops |>
-#   drop_na(biomass_ugL) |>
-#   mutate(Trophic_Group = ifelse(is.na(Trophic_Group) & 
-#                                   Functional_Group=='Nauplii',
-#                                 '(nauplii)', Trophic_Group)) |>
-#   left_join(lakes_sf |> as.data.frame() |> select(Reservoir_Name, gnis_name))
-# 
-# ggplot(zoops_tg) +
-#   geom_bar(aes(Collection_Date, biomass_ugL, fill=Trophic_Group), stat='identity') +
-#   facet_wrap(~gnis_name, scales='free')
-  
+# basics: trophic grouping ####
+zoops_tg <- zoops |>
+  drop_na(biomass_ugL) |>
+  mutate(Trophic_Group = ifelse(is.na(Trophic_Group) &
+                                  Functional_Group=='Nauplii',
+                                '(nauplii)', Trophic_Group)) |>
+  left_join(lakes_sf |> as.data.frame() |> select(Reservoir_Name, gnis_name)) |>
+  mutate(DOY = lubridate::yday(Collection_Date)) |>
+  group_by(gnis_name, DOY, Collection_Date, Trophic_Group) |>
+  summarise(tg_biomass = sum(biomass_ugL))
 
+ggplot(zoops_tg |> filter(!is.na(gnis_name),
+                          year(Collection_Date)==2021)) +
+  geom_bar(aes(DOY, tg_biomass, fill=Trophic_Group),stat='identity', width=7) +
+  facet_wrap(~gnis_name, scales='free_y') +
+  theme_bw() +
+  labs(x='Day of year', y='Zooplankton biomass'~(mu*g~L^-1)) +
+  scale_fill_brewer('Trophic group', type="qual", palette="Set2")
+ggsave('Figures/Exploration/Zoops/Zoops_barplot_2021.png', height=5.5, width=7.5, dpi=1200)
+
+ggplot(zoops_tg |> filter(!is.na(gnis_name),
+                          year(Collection_Date)==2022)) +
+  geom_bar(aes(DOY, tg_biomass, fill=Trophic_Group),stat='identity', width=7) +
+  facet_wrap(~gnis_name, scales='free_y') +
+  theme_bw() +
+  labs(x='Day of year', y='Zooplankton biomass'~(mu*g~L^-1)) +
+  scale_fill_brewer('Trophic group', type="qual", palette="Set2")
+ggsave('Figures/Exploration/Zoops/Zoops_barplot_2022.png', height=5.5, width=7.5, dpi=1200)
 
 
