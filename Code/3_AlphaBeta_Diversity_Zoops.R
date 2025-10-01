@@ -262,6 +262,37 @@ ggplot() +
 ggsave('Figures/Exploration/Zoops/NMDS_intrinsic.png',height=4.5,width=6.5,dpi=1200)
 
 
+
+
+## Extrinsic variables ####
+# UNABLE TO RUN PROPERLY WITH SO MANY NAs
+# investigate other variables that might drive the distribution
+metadata_noNA <- scores |>
+  select(Latitude, Longitude, Temp_C,DO_mgL) |> drop_na()
+
+set.seed(69420)
+envbio.fit <- envfit(nmds, metadata_noNA, permutations=999, na.rm=TRUE)
+head(envbio.fit)
+
+envbio.fit_df <- as.data.frame(scores(envbio.fit, display='vectors'))  #extracts relevant scores from envifit
+envbio.fit_df <- cbind(envbio.fit_df, envbio.variables = rownames(envbio.fit_df)) #and then gives them their names
+
+envbio.fit_df <- cbind(envbio.fit_df, pval = envbio.fit$vectors$pvals) # add pvalues to dataframe
+sig.envbio.fit <- subset(envbio.fit_df, pval<=0.05) #subset data to show variables significant at 0.05
+
+sig.envbio.fit
+
+#Now we have the relevant information for plotting the ordination!
+ggplot() +
+  geom_point(scores, mapping=aes(x=NMDS1, y=NMDS2), color='grey50') +
+  theme_bw() +
+  geom_segment(sig.envbio.fit, mapping=aes(x=0, xend=NMDS1*2, y=0, yend=NMDS2*2), arrow = arrow(length = unit(0.25, "cm")), colour = "grey10", lwd=0.3) + #add vector arrows of significant species
+  ggrepel::geom_text_repel(sig.envbio.fit, mapping=aes(x=NMDS1*2, y=NMDS2*2, label = envbio.variables), cex = 4, direction = "both", segment.size = 0.25) + #add labels, use ggrepel::geom_text_repel so that labels do not overlap
+  theme(legend.position= 'none')
+ggsave('Figures/Exploration/Zoops/NMDS_extrinsic.png',height=4.5,width=6.5,dpi=1200)
+
+
+
 # basics: trophic grouping ####
 zoops_tg <- zoops |>
   drop_na(biomass_ugL) |>
